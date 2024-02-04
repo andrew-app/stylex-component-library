@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/Quicksand.ttf') format('truetype');
+}
+  
+@font-face {
+  font-family: 'Libre Franklin';
+  src: url('/LibreFranklin.ttf') format('truetype');
+}
