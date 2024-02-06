@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <GDSButton backgroundColor='red' {...stylex.props(styles.override)}>
+      <GDSButton overrideStyles={[styles.overrideBg, styles.overrideFont]}>
         Click Me
       </GDSButton>
     </>
@@ -15,9 +15,15 @@ function App() {
 export default App;
 
 const styles = stylex.create({
-  override: {
-    ':hover': {
-      backgroundColor: 'blue'
-    }
+  overrideBg: {
+    backgroundColor: {
+      default: 'hsla(282.95, 82.24%, 41.96%, 1)',
+      ':hover': 'hsla(282.95, 82.24%, 41.96%, 0.75)',
+      ':active': 'hsla(282.95, 82.24%, 41.96%, 1)',
+    },
+  },
+  overrideFont : {
+    fontFamily: "Libre Franklin",
+    fontSize: '2rem',
   }
 })

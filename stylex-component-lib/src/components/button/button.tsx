@@ -6,12 +6,12 @@ import * as stylex from '@stylexjs/stylex';
 
 interface GDSButtonProps extends ButtonProps {
     size?: 'small' | 'medium' | 'large';
-    backgroundColor?: string;
+    overrideStyles?: stylex.StyleXStyles[] | stylex.StyleXStyles;
 }
 
 export const GDSButton = React.forwardRef(function CustomButton(props: GDSButtonProps, ref: React.ForwardedRef<any>) {
 
-    const { children,size,backgroundColor } = props;
+    const { children,size, overrideStyles} = props;
 
     const { getRootProps } = useButton({
         ...props,
@@ -21,14 +21,12 @@ export const GDSButton = React.forwardRef(function CustomButton(props: GDSButton
     return (
         <Button
           {...getRootProps()}
-          {...stylex.props(styles[size ?? 'medium'], styles.base(backgroundColor))}
+          {...stylex.props(styles[size ?? 'medium'], styles.base, overrideStyles)}
         >
           {children}
         </Button>
     );
 });
-
-const defaultButtonColor = 'hsla(310,82%,42%';
 
 const styles = stylex.create({
     small: {
@@ -40,11 +38,11 @@ const styles = stylex.create({
     large: {
         fontSize: '2rem',
     },
-    base: (bgColor?: string) => ({
+    base: {
         backgroundColor: {
-            default: bgColor ?? `${defaultButtonColor},1)`,
-            ':hover': bgColor ?? `${defaultButtonColor},0.75)`,
-            ':active': bgColor ??`${defaultButtonColor},1)`,
+            default: 'hsla(310,82%,42%,1)',
+            ':hover': 'hsla(310,82%,42%,0.75)',
+            ':active': 'hsla(310,82%,42%,1)',
         },
         ':disabled': {
             opacity: 0.25,
@@ -55,7 +53,5 @@ const styles = stylex.create({
         border: 'none',
         display: 'inline-flex',
         padding: '5px 10px',
-    }),
-
-    
+    },
 })
